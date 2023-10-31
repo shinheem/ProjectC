@@ -1,0 +1,96 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<title>BELLO</title>
+<link rel="stylesheet" href="../assets/css/main.css?=3">
+
+<!-- jQuery 로드 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+		// "데일리" 버튼 클릭 시 뷰 로드
+		$("#daily-button").click(function() {
+			loadView("dailyList.jsp");
+		});
+
+		// "모던" 버튼 클릭 시 뷰 로드
+		$("#modern-button").click(function() {
+			loadView("modernList.jsp");
+		});
+
+		// "힙" 버튼 클릭 시 뷰 로드
+		$("#hip-button").click(function() {
+			loadView("hipList.jsp");
+		});
+
+		// AJAX를 사용하여 뷰를 로드하고 컨테이너에 표시하는 함수
+		function loadView(viewUrl) {
+			$.ajax({
+				url : viewUrl,
+				success : function(result) {
+					$("#view-container").html(result);
+				}
+			});
+		}
+	});
+</script>
+</head>
+<body class="is-preload">
+
+	<header id="header">
+		<div>
+			<div class="inner">
+				<ul>
+					<li><a href="index.html">공지사항</a></li>
+					<li><a href="#">마이페이지</a></li>
+					<li><a href="generic.html">장바구니</a></li>
+					<li><a href="elements.html">고객센터</a></li>
+				</ul>
+			</div>
+			<div class="first">
+				<ul>
+					<li><a href="#">OUTER</a></li>
+					<li><a href="#">TOP</a></li>
+					<li><a href="#">PANTS</a></li>
+					<li><a href="#">SHOES</a></li>
+					<li><a href="#">STYLING</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<div id="search">
+		<a class="logo" href="index.html"><strong>Bello</strong></a>
+	</div>
+
+	<h1>카테고리별 스타일링 목록</h1>
+
+	<button id="daily-button">DAILY</button>
+	<button id="modern-button">MORDERN</button>
+	<button id="hip-button">Hip</button>
+
+	<div id="view-container"></div>
+
+	<c:set var="listStyling" value="${dao.listAll}" />
+
+	<footer id="footer">
+		<h4>&copy; Untitled Corporation. All rights reserved. Lorem ipsum
+			dolor sit amet nullam.</h4>
+		<ul>
+			<li class="icon solid fa-map-marker-alt"></li>
+			<li class="icon solid fa-envelope"></li>
+			<li class="icon brands fa-twitter"></li>
+			<li class="icon solid fa-phone"></li>
+		</ul>
+	</footer>
+</body>
+</html>

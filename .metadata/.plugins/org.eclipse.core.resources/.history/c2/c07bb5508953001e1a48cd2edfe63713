@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ClothesDto">
+
+    <!-- 상품 목록 조회 -->
+    <select id="list" resultType="dto.ClothesDto">
+        SELECT * FROM clothes
+    </select>
+    
+    <!-- 아우터 조회 -->
+	<select id="outerlist" resultType="dto.ClothesDto">
+		SELECT * FROM clothes
+		WHERE clotheskind = 1
+	</select>
+	
+    <!-- 상의 조회 -->
+	<select id="toplist" resultType="dto.ClothesDto">
+		SELECT * FROM clothes
+		WHERE clotheskind = 2
+	</select>
+	
+    <!-- 하의 조회 -->
+	<select id="pantslist" resultType="dto.ClothesDto">
+		SELECT * FROM clothes
+		WHERE clotheskind = 3
+	</select>
+	
+    <!-- 신발 조회 -->
+	<select id="shoeslist" resultType="dto.ClothesDto">
+		SELECT * FROM clothes
+		WHERE clotheskind = 4
+	</select>
+	
+    <!-- 상품 페이징 목록 조회 -->
+    <select id="pagelist" parameterType="java.util.Map" resultType="dto.ClothesDto">
+        SELECT * FROM clothes
+        WHERE clothesKind = #{clothesKind}
+        AND price2 &lt;= #{price2}
+        <!-- ... 다른 조건도 추가할 수 있음 -->
+    </select>
+
+    <!-- 상품 전체 개수 조회 -->
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM clothes
+    </select>
+
+    <!-- 조회수 증가 -->
+    <update id="setReadCount" parameterType="int">
+        UPDATE clothes SET readCount = readCount + 1 WHERE id = #{value}
+    </update>
+
+    <!-- 상품 정보 수정 -->
+    <update id="update" parameterType="dto.ClothesDto">
+        UPDATE clothes
+        SET clothesKind = #{clothesKind},
+            price2 = #{price2},
+            clothesName = #{clothesName},
+            clothesContent = #{clothesContent},
+            clothesImage = #{clothesImage},
+            clothesCount = #{clothesCount},
+            pregDate = #{pregDate},
+            useyn = #{useyn}
+        WHERE clothesNum = #{clothesNum}
+    </update>
+
+    <!-- 특정 상품 조회 -->
+    <select id="selectOne" parameterType="int" resultType="dto.ClothesDto">
+        SELECT * FROM clothes WHERE clothesNum = #{clothesNum}
+    </select>
+
+    <!-- 상품 삭제 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM clothes WHERE clothesNum = #{clothesNum}
+    </delete>
+
+    <!-- 상품 등록 -->
+    <insert id="insert" parameterType="dto.ClothesDto">
+        INSERT INTO clothes (clothesNum, clothesKind, price2,pricesum clothesName, clothesContent, clothesImage, clothesCount, pregDate, useyn)
+        VALUES (#{clothesNum}, #{clothesKind}, #{price2},#{pricesum} #{clothesName}, #{clothesContent}, #{clothesImage}, #{clothesCount}, #{pregDate}, #{useyn})
+    </insert>
+
+</mapper>

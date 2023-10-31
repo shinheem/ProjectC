@@ -1,0 +1,27 @@
+package dto;
+
+import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Builder
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class BuyDto {
+
+	private Date pbuydate;
+	private int clothesNum;
+	private String id;
+	private String cname;
+	private int cprice;
+	private int cpricesum;
+	private int cquantity;
+	private String csize;
+	private Date buydate;
+}

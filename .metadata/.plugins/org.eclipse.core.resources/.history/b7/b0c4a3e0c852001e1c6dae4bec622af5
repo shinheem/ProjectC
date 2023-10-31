@@ -1,0 +1,9 @@
+<%@page import="dto.ShoppingCartDto"%>
+<%@page import="dao.ShoppingCartDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+ ShoppingCartDao dao = ShoppingCartDao.getShoppingCartDao();
+           	  ShoppingCartDto dto = new ShoppingCartDto();
+           int delete = dao.delete((String)session.getAttribute("id"));
+%>

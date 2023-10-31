@@ -1,0 +1,49 @@
+<%@page import="dto.CustomerAnswerDto"%>
+<%@page import="dto.CustomerDto"%>
+<%@page import="dao.CustomerAnswerDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+	//필요한 파라미터 가져오기 : mref,writer,content, f(insert 또는 delete) ,page
+	int question= Integer.parseInt(request.getParameter("question"));		//메인글 idx
+	String f = request.getParameter("f");
+	String pageNo = request.getParameter("page");
+	CustomerAnswerDao dao = CustomerAnswerDao.getInstance();
+	
+	if(f.equals("1")){		//insert
+		String answerContents = request.getParameter("answerContents");
+		CustomerDto user = (CustomerDto)session.getAttribute("user");
+		String answerWriter = user.getId();
+		CustomerAnswerDto dto = CustomerAnswerDto.builder()
+					.answerContents(answerContents)
+					.answerWriter(answerWriter)
+					.question(question)
+					.build();
+		System.out.println("f: value"+f);
+		if(dao.answerInsert(dto)==1){		//댓글 저장 완료
+			request.setAttribute("message", "댓글 등록이 완료되었습니다.");
+		}
+	
+		
+	}else if (f.equals("2")) {  //delete
+		int anum= Integer.parseInt(request.getParameter("anum"));
+		if(dao.answerDelete(anum)==1) {	
+			request.setAttribute("message", "댓글 삭제 완료되었습니다.");
+		}
+	}else {
+		throw new IllegalAccessException();
+	}
+	
+	request.setAttribute("url", "QnARead.jsp?qnum="+ question + "&page="+pageNo);
+	pageContext.forward("QnAalert.jsp");
+%>
+
+</body>
+</html>

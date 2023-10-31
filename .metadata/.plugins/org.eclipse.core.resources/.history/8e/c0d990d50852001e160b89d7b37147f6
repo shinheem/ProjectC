@@ -1,0 +1,29 @@
+<%@page import="dao.BuyDao"%>
+<%@page import="dao.ShoppingCartDao"%>
+<%@page import="dto.ShoppingCartDto"%>
+<%@page import="dto.BuyDto"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+int clothesNum = 0;
+
+if(request.getParameter("clothesNum") != null){
+	clothesNum = Integer.parseInt("clothesNum");
+}
+
+String id = (String)session.getAttribute("id");
+
+ShoppingCartDao dao = ShoppingCartDao.getShoppingCartDao();
+
+List<ShoppingCartDto> dto = dao.list();
+
+Map<String,List<ShoppingCartDto>> map = new HashMap<>();
+map.put("list",dto);
+
+BuyDao dao1 = BuyDao.getInstance();
+
+BuyDto vo = dao1.buylist(map);
+%>

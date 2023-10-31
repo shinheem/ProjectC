@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CustomerQuestionDto">
+
+<select id="list" resultType="dto.CustomerQuestionDto">
+ 		SELECT * 
+ 		FROM CustomerQuestion
+ 	</select>
+ 	
+ 	<select id="serchCount" resultType="int" parameterType="java.util.Map">
+    SELECT COUNT(*)
+    FROM CustomerQuestion
+    WHERE
+     questionTitle LIKE '%' || #{keyword} || '%'
+</select>
+
+	<select id="pagelist" resultType="dto.CustomerQuestionDto" parameterType="java.util.Map">
+ 		SELECT * FROM 
+			(SELECT rownum r ,f.* FROM
+								(SELECT * FROM CustomerQuestion  ORDER BY qnum DESC) f
+								)
+		WHERE r BETWEEN #{start} AND #{end}
+ 	</select>
+
+<select id="serch" resultType="dto.CustomerQuestionDto" parameterType="java.util.Map">
+  SELECT *
+    FROM (
+        SELECT rownum AS rnum, m.*
+        FROM (
+            SELECT *
+            FROM CustomerQuestion
+            WHERE
+                (questionTitle LIKE '%' || #{keyword} || '%' )
+            ORDER BY qnum DESC
+        ) m
+    )
+    WHERE rnum BETWEEN #{start} AND #{end}
+
+</select>	
+<insert id="questionInsert" parameterType="dto.CustomerQuestionDto">
+		INSERT INTO 
+		CustomerQuestion(qnum,questionWriter,questionTitle,questionContent,ip)
+		VALUES
+		(CustomerQuestion_qnum_seq.nextval,#{questionWriter},#{questionTitle},#{questionContent},
+		#{ip,jdbcType=VARCHAR})
+		<selectKey keyProperty="qnum" resultType="int" order="AFTER">
+		select CustomerQuestion_qnum_seq.currval
+		from dual
+		</selectKey>
+		
+</insert>	
+	<!-- 수정, 삭제 delete -->
+	<update id="questionUpdate" parameterType="dto.CustomerQuestionDto">
+		UPDATE CustomerQuestion 
+		SET
+		questionTitle=#{questionTitle}, questionContent=#{questionContent}, ip=#{ip}
+		WHERE 
+		qnum=#{qnum}
+	</update>
+	
+	<delete id="questionDelete" parameterType="int">
+		DELETE FROM CustomerQuestion
+		WHERE qnum=#{qnum}
+	</delete>
+	<!-- 전체글 개수 -->
+	 	<select id="count" resultType="int">
+ 		SELECT count(*) FROM CustomerQuestion
+ 	</select>
+ 	
+ 	<select id="selectByqnum" parameterType="int" resultType="dto.CustomerQuestionDto">
+ 		SELECT * 
+ 		FROM 
+ 			CustomerQuestion
+ 		WHERE 
+ 			qnum=#{qnum}   
+ 	</select>
+</mapper>

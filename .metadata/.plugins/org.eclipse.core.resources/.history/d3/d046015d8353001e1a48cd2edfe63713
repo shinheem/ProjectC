@@ -1,0 +1,36 @@
+<%@page import="dto.ShoppingCartDto"%>
+<%@page import="dao.ShoppingCartDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+int num = 0;
+int cQun = 0;
+
+if(request.getParameter("clothesNum") != null) {
+	num = Integer.parseInt(request.getParameter("clothesNum"));
+}
+
+if(request.getParameter("cartQuantity") != null) {
+	cQun = Integer.parseInt(request.getParameter("cartQuantity"));
+}
+
+
+
+if(cQun != 0) {
+	cQun++;
+}
+
+String id = (String)session.getAttribute("id");
+
+ShoppingCartDao dao = ShoppingCartDao.getShoppingCartDao();
+
+int aa =dao.update(ShoppingCartDto.builder()
+						.id(id)
+						.clothesNum(num)
+						.cartQuantity(cQun)
+						.build());
+
+%>
+<script type="text/javascript">
+//location.href = document.referrer;//뒤로가기 후 새로고침
+</script>

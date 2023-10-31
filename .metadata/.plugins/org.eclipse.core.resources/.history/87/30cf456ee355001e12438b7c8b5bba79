@@ -1,0 +1,27 @@
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="dao.CustomerDao"%>
+<%@ page import="java.util.Map"%>
+
+<%
+String id = request.getParameter("id");
+CustomerDao dao = new CustomerDao();
+
+int isDuplicate = dao.checkDuplicatedId(id);
+
+String message = "";
+
+if (isDuplicate !=0) {
+    message = "이미 사용 중인 아이디입니다.";
+} else {
+    message = "사용 가능한 아이디입니다.";
+}
+ 
+ 
+ 
+// 메시지를 세션에 저장
+request.setAttribute("message", message);
+request.setAttribute("id",id);
+// register.jsp로 포워드
+pageContext.forward("register.jsp");
+%>

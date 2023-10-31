@@ -1,0 +1,18 @@
+<%@page import="dto.ShoppingCartDto"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.ShoppingCartDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+ShoppingCartDao dao1 = ShoppingCartDao.getShoppingCartDao();
+
+List<ShoppingCartDto> dto = dao1.list();
+
+//dto 항목 모두에 대해 수량 * 단가를 누적해서 더하면 총합계
+
+
+request.setAttribute("cartlist", dto);
+
+//request.setAttribute("sum", sum);
+pageContext.forward("cart_View.jsp");
+%>

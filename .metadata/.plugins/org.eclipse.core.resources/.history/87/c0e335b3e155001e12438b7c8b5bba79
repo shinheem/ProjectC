@@ -1,0 +1,42 @@
+<%@page import="dto.CustomerDto"%>
+<%@page import="dao.CustomerDao"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+String id = request.getParameter("id");
+String password = request.getParameter("password");
+
+Map<String, String> map = new HashMap<>();
+map.put("id", id);
+map.put("password", password);
+CustomerDao dao = CustomerDao.getInstance();
+CustomerDto vo = dao.login(map);
+
+String url = request.getContextPath();
+String back = (String) session.getAttribute("back");
+if (vo != null) {
+    // 로그인 성공
+    session.setAttribute("user", vo);
+    session.setAttribute("id", id);
+    if (back != null) {
+        url = back;
+        session.removeAttribute("back"); // back 이름의 애트리뷰트 삭제
+    } else {
+        response.sendRedirect(url);
+    }
+} else {
+    // 로그인 실패
+    String errorMessage = "";
+    if (id != null) {
+        errorMessage = "아이디가 올바르지 않습니다.";
+    } else if (password != null) {
+        errorMessage = "비밀번호가 올바르지 않습니다.";
+    } else {
+        errorMessage = "아이디와 비밀번호를 입력해주세요.";
+    }
+    request.setAttribute("errorMessage", errorMessage);
+    request.getRequestDispatcher("login_View.jsp").forward(request, response);
+}
+%>

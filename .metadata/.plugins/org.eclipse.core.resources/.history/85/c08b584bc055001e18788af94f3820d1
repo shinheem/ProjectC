@@ -1,0 +1,66 @@
+<%@page import="dto.CustomerDto"%>
+<%@page import="dao.CustomerDao"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>마이 페이지</title>
+<link rel="stylesheet" href="../assets/css/mypage.css?=3" />
+</head>
+<body>
+
+
+
+<!-- Header -->
+<%@ include  file="../nav.jsp"%> 	<div class="leftnav">
+ 				<ul>
+  	<li><a class="home" href="#">마이페이지</a></li>
+  	<li><a href="#">개인정보 수정</a></li>
+  	<li><a href="../buyhistory/buy_select.jsp">주문내역</a></li>
+  	<li><a href="#">1:1문의</a></li>
+	</ul>
+	 </div>
+	 
+	 <form action="mypageupdate.jsp" method="post">
+	 <div class="cd1">
+ 	<h2>개인정보 수정</h2>
+ 			
+       		<div style="display: flex;" class="la">
+            <label for="ID" style="margin: auto 0px;">ID : </label>
+            <input type="text" id="id" name="id" style="margin-left: 62px; height: 40px;" value="${vo.id}">
+            </div>
+            <div style="display: flex;" class="la">
+            <label for="ps" style="margin: auto 0px;">비밀번호 : </label>
+            <input type="password" id="password" name="password" style="margin-left: 10px; height: 40px;" value="${vo.password}">
+            </div>
+            <div style="display: flex;" class="la">
+            <label for="name" style="margin: auto 0px;">이름 : </label>
+            <input type="text" id="name" name="name" style="margin-left: 45px; height: 40px;" value="${vo.name}">
+            </div>
+             
+            <div style="display: flex;" class="la">
+            <label for="address" style="margin: auto 0px;">전화번호 : </label>
+            <input type="text" id="tel" name="tel" style="margin-left:10px; height: 40px;" value="${vo.tel}">
+            </div>
+            
+            <div style="display: flex;" class="la">
+            <label for="e-mail" style="margin: auto 0px;">이메일 : </label>
+            <input type="text" id="email" name="email" style="margin-left: 28px; height: 40px;" value="${vo.email}">
+            </div>
+            
+ 	<button >수정</button>
+        	</div>
+     </form>
+ <!-- Footer -->
+ 
+         <footer id="footer"> 
+                  <h4>&copy; Untitled Corporation. All rights reserved. Lorem ipsum dolor sit amet nullam.</h4>
+                           <ul>
+                        <li class="icon solid fa-map-marker-alt">
+                        <li class="icon solid fa-envelope">
+                        <li class="icon brands fa-twitter">
+                        <li class="icon solid fa-phone">
+                        </ul>
+         </footer>
+</body>
+</html>

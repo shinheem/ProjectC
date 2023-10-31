@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="mybatis.SqlSessionBean"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
+    <fullyQualifiedTypeName name="dao.ClothesDao"/>
+    <fullyQualifiedTypeName name="dto.ClothesDto"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="dto.BuyDto"/>
+    <fullyQualifiedTypeName name="dto.ShoppingCartDto"/>
+    <fullyQualifiedTypeName name="lombok.Setter"/>
+    <fullyQualifiedTypeName name="dao.CustomerDao"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="org.apache.catalina.filters.SessionInitializerFilter"/>
+    <fullyQualifiedTypeName name="dto.CustomerDto"/>
+</qualifiedTypeNameHistroy>

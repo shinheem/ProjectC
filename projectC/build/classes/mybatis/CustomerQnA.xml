@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- src/main/resources/mappers/customerQnAMapper.xml -->
+<!-- src/main/resources/mappers/customerQnAMapper.xml -->
+<mapper namespace="CUstomerQnADto">
+
+    <!-- 고객 문의 정보 추가 -->
+    <insert id="insert" parameterType="dto.CustomerQnADto">
+        INSERT INTO customer_qna (customerQnANum, qnaSubject, questionContents, answerContents, id, questionDate, answerDate)
+        VALUES (#{customerQnANum}, #{qnaSubject}, #{questionContents}, #{answerContents}, #{id}, #{questionDate}, #{answerDate})
+    </insert>
+
+    <!-- 고객 문의 정보 조회 -->
+    <select id="selectOne" parameterType="int" resultType="dto.CustomerQnADto">
+        SELECT * FROM customer_qna WHERE customerQnANum = #{value}
+    </select>
+
+    <!-- 고객 문의 정보 목록 조회 -->
+    <select id="list" resultType="dto.CustomerQnADto">
+        SELECT * FROM customer_qna
+    </select>
+
+    <!-- 고객 문의 정보 삭제 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM customer_qna WHERE customerQnANum = #{value}
+    </delete>
+
+    <!-- 고객 문의 정보 수정 -->
+    <update id="update" parameterType="dto.CustomerQnADto">
+        UPDATE customer_qna
+        SET qnaSubject = #{qnaSubject},
+            questionContents = #{questionContents},
+            answerContents = #{answerContents},
+            id = #{id},
+            questionDate = #{questionDate},
+            answerDate = #{answerDate}
+        WHERE customerQnANum = #{customerQnANum}
+    </update>
+    
+    <!-- 답변달기  -->
+    <update id="addAnswer" parameterType="dto.CustomerQnADto">
+        UPDATE customer_qna
+        SET answerContents = #{answerContents},
+            answerDate = #{answerDate}
+        WHERE customerQnANum = #{customerQnANum}
+    </update>
+    
+    <!-- 답변 삭제  -->
+    <update id="deleteAnswer" parameterType="int">
+        UPDATE customer_qna
+        SET answerContents = NULL,
+            answerDate = NULL
+        WHERE customerQnANum = #{value}
+    </update>
+
+</mapper>

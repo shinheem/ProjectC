@@ -1,0 +1,102 @@
+<%@page import="org.apache.ibatis.session.SqlSession"%>
+<%@page import="mybatis.SqlSessionBean"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.io.*,java.util.*,javax.servlet.*"%>
+<%@ page import="javax.servlet.http.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>BELLO</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="assets/css/main.css?=3" />
+</head>
+	<%@ include  file="nav.jsp"%>
+    <!-- Banner -->
+    <div id="banner">
+        <!-- Banner 내용 추가 -->
+    </div>
+
+    <!-- Main -->
+    <div class="inner">
+        <!-- Content -->
+        <div id="content">
+            <!-- Posts -->
+            <header>
+                <h1>BEST</h1>
+            </header>
+            <section class="posts">
+                <!-- 상품 목록 표시 -->
+                <div class="image fit" style="text-align: center;">
+                    <a href="clothes/clothes_detail.jsp?clothesNum=${vo.clothesNum}"><img src="/imageupload/3.jpg" alt="" /></a>
+                    <p>테일러드 크롭 반팔 자켓</p>
+                     <a><fmt:formatNumber value="31120" type="currency" currencySymbol="￦"/></a>
+                </div>
+                 <div class="image fit" style="text-align: center;">
+                    <a href="clothes/clothes_detail.jsp?clothesNum=${vo.clothesNum}"><img src="/imageupload/6.jpg" alt="" /></a>
+                    <a><fmt:formatNumber value="19900" type="currency" currencySymbol="￦"/></a>
+                </div>
+                 <div class="image fit" style="text-align: center;">
+                    <a href="clothes/clothes_detail.jsp?clothesNum=${vo.clothesNum}"><img src="/imageupload/59.jpg" alt="" /></a>
+                    <a><fmt:formatNumber value="21900" type="currency" currencySymbol="￦"/></a>
+                </div>
+                <!-- 다른 상품들 추가 -->
+            </section>
+
+            <!-- Mini Posts -->
+            <header>
+                <h1>NEW</h1>
+            </header>
+            <section class="mini-posts">
+                <!-- 상품 목록 표시 -->
+                <div class="image fit" style="text-align: center;">
+                    <a href="clothes/clothes_detail.jsp?clothesNum=${vo.clothesNum}"><img src="/imageupload/2.jpg" alt="" /></a>
+                    <a><fmt:formatNumber value="64800" type="currency" currencySymbol="￦"/></a>
+                </div>
+                 <div class="image fit" style="text-align: center;">
+                    <a href="clothes/clothes_detail.jsp?clothesNum=${vo.clothesNum}"><img src="/imageupload/23.jpg" alt="" /></a>
+                    <a><fmt:formatNumber value="29000" type="currency" currencySymbol="￦"/></a>
+                </div>
+                 <div class="image fit" style="text-align: center;">
+                    <a href="clothes/clothes_detail.jsp?clothesNum=${vo.clothesNum}"><img src="/imageupload/93.jpg" alt="" /></a>
+                    <a><fmt:formatNumber value="24560" type="currency" currencySymbol="￦"/></a>
+                </div>
+                <!-- 다른 상품들 추가 -->
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+	<%@ include  file="footer.jsp"%>
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.dropotron.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addToCartButtons = document.querySelectorAll('button');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // 실제로는 여기에 상품을 장바구니에 추가하는 로직이 들어갑니다.
+                    alert('상품이 장바구니에 추가되었습니다!');
+                });
+            });
+        });
+    </script>
+    <script>
+    function confirmLogin() {
+        if (confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")) {
+            window.location.href = "login/login_View.jsp";
+        }
+    }
+</script>
+</body>
+</html>

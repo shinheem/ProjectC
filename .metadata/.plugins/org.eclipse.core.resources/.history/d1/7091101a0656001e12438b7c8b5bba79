@@ -1,0 +1,120 @@
+
+<!DOCTYPE HTML>
+<!--
+	Apex by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<!-- 웹사이트 전체적인 틀-->
+<html>
+<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<title>BELLO</title>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="../css2/main.css?=3" />
+</head>
+<body class="is-preload">
+
+	<!-- 					<a class="logo" href="index.html"><strong>Bello</strong></a> -->
+	<!-- Header -->
+	<header id="header">
+		<div>
+			<div class="inner">
+				<ul>
+							<li><a href="list.jsp">고객목록</a></li>
+							<li><a href="clothesList.jsp">상품등록</a></li>
+	<!-- 로그인 폼 위에 카카오 로그인 버튼 추가 -->
+							<li><a href="adminNotice.jsp">공지사항</a></li>
+							<li><a href="">고객센터</a></li>
+							<li><a href ="../login/logout.jsp">로그아웃</a></li>
+						</ul>		
+			</div>
+			<div class="first">
+				<ul>
+					<li><a href="clothe_outer.jsp">OUTER</a></li>
+					<li><a href="clothe_top.jsp">TOP</a></li>
+					<li><a href="clothe_pants.jsp">PANTS</a></li>
+					<li><a href="clothe_shoes.jsp">SHOES</a></li>
+					<li><a href="#">STYLING</a> <!-- 스타일링 배너 -->
+						
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<!-- Search Bar -->
+    <div id="search">
+        <a class="logo" href="index.html"><strong>Bello</strong></a>
+    </div>
+
+    <!-- Banner -->
+    <div id="banner">
+        <!-- Banner 내용 추가 -->
+    </div>
+
+    <!-- Main -->
+    <div class="inner">
+        <!-- Content -->
+        <div id="content">
+            <!-- Posts -->
+            <header>
+                <h1>BEST</h1>
+            </header>
+            <section class="posts">
+                <!-- 상품 목록 표시 -->
+                <div class="image fit" style="text-align: center;">
+                    <a href="#"><img src="images/4.jpg" alt="" /></a>
+                    <p>가격</p>
+                    <ul class="actions fixed">
+                        <li><a href="#" class="button">장바구니 담기</a></li>
+                        <li><a href="#" class="button">구매하기</a></li>
+                    </ul>
+                </div>
+                <!-- 다른 상품들 추가 -->
+            </section>
+
+            <!-- Mini Posts -->
+            <header>
+                <h1>NEW</h1>
+            </header>
+            <section class="mini-posts">
+                <!-- 상품 목록 표시 -->
+                <div class="image fit" style="text-align: center;">
+                    <a href="#"><img src="images/2.jpg" alt="" /></a>
+                    <p>4000</p>
+                    <ul class="actions fixed">
+                        <li><a href="#" class="button">장바구니 담기</a></li>
+                        <li><a href="#" class="button">구매하기</a></li>
+                    </ul>
+                </div>
+                <!-- 다른 상품들 추가 -->
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <h4>&copy; Untitled Corporation. All rights reserved. Lorem ipsum dolor sit amet nullam.</h4>
+        <ul>
+            <li class="icon solid fa-map-marker-alt"></li>
+            <li class="icon solid fa-envelope"></li>
+            <li class="icon brands fa-twitter"></li>
+            <li class="icon solid fa-phone"></li>
+        </ul>
+    </footer>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.dropotron.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+</html>

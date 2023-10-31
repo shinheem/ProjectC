@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="styling">
+
+	<!-- Styling 목록 조회 -->
+	<select id="list" resultType="dto.StylingDto">
+		SELECT *
+		FROM Styling
+	</select>
+
+	<!-- Styling 등록 -->
+	<insert id="insert" parameterType="dto.StylingDto">
+		INSERT INTO Styling
+		VALUES
+		(#{clothesNum1}, #{clothesNum2}, #{clothesNum3}, #{clothesNum4},
+		#{stylingContent}, #{picture}, #{styleDate, javaType=java.util.Date,
+		jdbcType=DATE})
+	</insert>
+
+	<!-- Styling 수정 -->
+	<update id="update" parameterType="dto.StylingDto">
+		UPDATE Styling
+		SET clothesNum1
+		= #{clothesNum1}, clothesNum2 = #{clothesNum2},
+		clothesNum3 =
+		#{clothesNum3}, clothesNum4 = #{clothesNum4},
+		stylingContent =
+		#{stylingContent}, picture = #{picture}, styleDate =
+		#{styleDate,
+		javaType=java.util.Date, jdbcType=DATE}
+		WHERE snum = #{snum}
+	</update>
+
+	<!-- Styling 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM Styling
+		WHERE snum
+		= #{snum}
+	</delete>
+
+	<!-- 스타일링 데일리 조회 -->
+	<select id="listDaily" resultType="dto.ClothesDto">
+		SELECT *
+		FROM clothes
+		WHERE
+		(category BETWEEN '10000' AND '19999')
+		OR (category BETWEEN '40000' AND
+		'49999')
+		OR (category BETWEEN '70000' AND '79999');
+	</select>
+
+	<!-- 스타일링 모던 조회 -->
+	<select id="listModern" resultType="dto.ClothesDto">
+		SELECT *
+		FROM clothes
+		WHERE
+		(category BETWEEN '20000' AND '29999')
+		OR (category BETWEEN '50000' AND
+		'59999')
+		OR (category BETWEEN '80000' AND '89999');
+	</select>
+
+	<!-- 스타일링 힙 조회 -->
+	<select id="listHip" resultType="dto.ClothesDto">
+		SELECT *
+		FROM clothes
+		WHERE
+		(category BETWEEN '30000' AND '39999')
+		OR (category BETWEEN '60000' AND
+		'69999')
+		OR (category BETWEEN '90000' AND '99999');
+	</select>
+	<select id="getStylingByCategory" resultType="dto.StylingDto"
+		parameterType="java.lang.String">
+		SELECT *
+		FROM Styling
+		WHERE category = #{category}
+	</select>
+	<select id="listAllClothes" resultType="dto.ClothesDto">
+		SELECT *
+		FROM Clothes
+	</select>
+	<!-- 스타일링 목록 조회 (모든 카테고리) -->
+	<select id="listAll" resultType="dto.StylingDto">
+		SELECT *
+		FROM Styling
+	</select>
+</mapper>
+

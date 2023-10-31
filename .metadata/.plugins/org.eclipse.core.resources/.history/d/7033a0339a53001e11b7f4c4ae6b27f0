@@ -1,0 +1,46 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
+<%@page import="dao.BuyDao"%>
+<%@page import="dao.ShoppingCartDao"%>
+<%@page import="dto.ShoppingCartDto"%>
+<%@page import="dto.BuyDto"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+int clothesNum = 0;
+
+if(request.getParameter("clothesNum") != null){
+	clothesNum = Integer.parseInt("clothesNum");
+}
+
+String id = (String)session.getAttribute("id");
+
+ShoppingCartDao dao = ShoppingCartDao.getShoppingCartDao();
+
+List<ShoppingCartDto> list = dao.selectId(id);
+
+Map<String,Object> map = new HashMap<>();
+map.put("list",list);
+
+BuyDao dao1 = BuyDao.getInstance();
+
+int vo = dao1.buyinsert(map);
+
+int delete = dao.delete(id);	//장바구니 삭제
+%>
+<script type="text/javascript">
+if(<%= list.size()%>!= 0){
+	alert('상품 구매가 완료되었습니다. 구매내역으로 넘어가시겠습니까?');
+	window.location.href = "buy_select.jsp";
+}else {
+	alert('장바구니 목록이 비어있습니다. 상품을 추가하신 후 다시 요청해주세요.');
+	history.back();
+}
+/* if(confirm("상품 구매가 완료되었습니다. 구매내역으로 넘어가시겠습니까?")) {
+window.location.href = "buy_select.jsp"
+}else {
+location.href = document.referrer;//뒤로가기 후 새로고침
+} */
+</script>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- src/main/resources/mappers/noticeMapper.xml -->
+<mapper namespace="NoticeDto">
+
+    <!-- 공지사항 추가 -->
+    <insert id="insert" parameterType="dto.NoticeDto">
+        INSERT INTO notice (content) VALUES (#{content})
+    </insert>
+
+    <!-- 공지사항 조회 -->
+    <select id="selectOne" parameterType="int" resultType="dto.NoticeDto">
+        SELECT * FROM notice WHERE noticeNum = #{value}
+    </select>
+
+    <!-- 공지사항 목록 조회 -->
+    <select id="list" resultType="dto.NoticeDto">
+        SELECT * FROM notice
+    </select>
+
+    <!-- 공지사항 삭제 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM notice WHERE noticeNum = #{value}
+    </delete>
+
+    <!-- 공지사항 수정 -->
+    <update id="update" parameterType="dto.NoticeDto">
+        UPDATE notice SET content = #{content} WHERE noticeNum = #{noticeNum}
+    </update>
+
+</mapper>

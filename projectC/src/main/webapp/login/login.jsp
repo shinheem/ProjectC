@@ -1,0 +1,80 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.io.*,java.util.*,javax.servlet.*"%>
+<%@ page import="javax.servlet.http.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>BELLO</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="../css2/login.css?=3" />
+    <link rel="stylesheet" href="assets/css/img.css?=3">
+    
+</head>
+<body class="is-preload">
+<!-- Header -->
+<%@ include  file="../nav.jsp"%>
+
+<!-- Search Bar -->
+<div id="search">
+    <a class="logo" href="../index.jsp"><strong>Bello</strong></a>
+</div>
+
+<!-- 이 공간에 기능들 넣으시면 됩니다.(상품 목록은 메인에서 갖다 쓰셔두 돼요.) -->
+<div class="container mt-3 width30">
+    <h2>회원 로그인</h2>
+
+    <!-- 오류 메시지를 표시할 div 요소 추가 -->
+    <div id="incorrect" style="display: none; color: red;">계정 정보가 일치하지 않습니다.</div>
+
+    <!-- 오류 메시지를 표시하는 JSTL 코드 추가 -->
+    <c:if test="${not empty errorMessage}">
+        <div id="errorMessage" style="color: red;">
+            ${errorMessage}
+        </div>
+    </c:if>
+
+    <form action="loginAction.jsp" method="post">
+        <div class="mb-3 mt-3">
+            <label for="userid">아이디:</label>
+            <input class="form-control" id="userid" placeholder="Enter id" 
+                name="id" required>
+        </div>
+        <div class="mb-3">
+            <label for="pwd">패스워드:</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" 
+                name="password" required>
+        </div>
+        <div class="form-check mb-3">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="remember"> Remember me
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="login()">로그인</button>
+        <button type="button" class="btn btn-primary" 
+            onclick="location.href='${pageContext.request.contextPath}'">HOME</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='register.jsp'">회원가입</button>
+    </form>
+</div>
+
+<!-- Footer -->
+<%@ include  file="../footer.jsp"%>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.dropotron.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+
+
+
+
+
+</body>
+</html>

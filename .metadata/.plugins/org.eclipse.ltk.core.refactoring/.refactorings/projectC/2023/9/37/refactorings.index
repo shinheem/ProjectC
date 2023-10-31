@@ -1,0 +1,45 @@
+1694399426398	Rename resource 'login.jsp'
+1694399443859	Rename resource 'loginAction.jsp'
+1694399494052	Delete element
+1694399514941	Rename resource 'customer.xml'
+1694404253207	Delete element
+1694407129482	Delete element
+1694409078346	Move 'login_View.jsp' to 'login'
+1694409081446	Move 'login.jsp' to 'login'
+1694412582086	Rename resource 'registerAction.jsp'
+1694412589958	Rename resource 'register.jsp'
+1694412595558	Rename resource 'register1.jsp'
+1694413170496	Rename resource 'registerAction.jsp'
+1694413174500	Rename resource 'register.jsp'
+1694413180033	Rename resource 'register1.jsp'
+1694413208283	Rename resource 'register.jsp'
+1694413217806	Rename resource 'registerAction.jsp'
+1694503602862	Rename resource 'shopping'
+1694503639890	Move 3 resources to 'cart'
+1694503660283	Move 2 resources to 'order'
+1694503955782	Rename resource 'mypageAction.jsp'
+1694505953199	Rename resource 'clothe'
+1694564242964	Rename resource 'order'
+1694564250882	Rename resource 'buy'
+1694564394010	Rename resource 'order.css'
+1694564845495	Rename resource 'order.jsp'
+1694564852836	Rename resource 'orderinsert.jsp'
+1694564859900	Rename resource 'orderView.jsp'
+1694569281082	Rename resource 'Order.xml'
+1694569479116	Rename type 'OrderDto'
+1694569680681	Rename type 'OrderDao'
+1694578892434	Delete element
+1694578983579	Delete elements
+1694579323863	Rename resource 'mybatis-config.xml'
+1694579417232	Move package
+1694579757143	Delete element
+1694579807969	Rename resource 'mybatis_config.xml'
+1694585957592	Rename resource 'buy.jsp'
+1694586168902	Rename resource 'buyinsert.jsp'
+1694673282894	Rename resource 'delete.jsp'
+1694673396703	Move 'buy_delete.jsp' to 'cart'
+1694673406017	Rename resource 'buy_delete.jsp'
+1694737320779	Delete element
+1694737330529	Delete element
+1694737349020	Delete element
+1694737363079	Delete element

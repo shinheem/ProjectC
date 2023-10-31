@@ -1,0 +1,31 @@
+package servlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
+import dto.StylingDto;
+import dao.StylingDao;
+
+@WebServlet("/stylingByCategory")
+public class StylingByCategoryServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L; // serialVersionUID를 추가
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 사용자가 선택한 카테고리를 파라미터로부터 가져옴
+        String selectedCategory = request.getParameter("category");
+
+        // StylingDao에서 해당 카테고리의 스타일링 목록을 가져옴
+        StylingDao stylingDao = StylingDao.getStylingDao();
+        List<StylingDto> stylingList = stylingDao.getStylingByCategory(selectedCategory);
+
+        // 스타일링 목록을 request 속성에 저장
+        request.setAttribute("stylingList", stylingList);
+
+        // JSP로 포워딩
+        request.getRequestDispatcher("/stylingList.jsp").forward(request, response);
+    }
+}

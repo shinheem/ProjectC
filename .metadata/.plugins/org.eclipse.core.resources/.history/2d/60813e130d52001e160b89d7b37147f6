@@ -1,0 +1,49 @@
+package dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import dto.ShoppingCartDto;
+import mybatis.SqlSessionBean;
+
+public class ShoppingCartDao {
+    private static ShoppingCartDao dao = new ShoppingCartDao();
+    private ShoppingCartDao() {}
+
+    public static ShoppingCartDao getShoppingCartDao() {
+        return dao;
+    }
+
+    // 장바구니 조회
+    public List<ShoppingCartDto> list() {
+        SqlSession mapper = SqlSessionBean.getSession();
+        List<ShoppingCartDto> list = mapper.selectList("ShoppingCartDto.selectAll");
+        mapper.close();
+        return list;
+    }
+    
+    public List<ShoppingCartDto> selectOne(int vo) {
+    	SqlSession mapper = SqlSessionBean.getSession();
+    	List<ShoppingCartDto> list = mapper.selectList("ShoppingCartDto.selectOne", vo);
+    	mapper.close();
+    	return list;
+    }
+
+    // 장바구니 추가
+    public int insert(ShoppingCartDto cnum) {
+        SqlSession mapper = SqlSessionBean.getSession();
+           int num = mapper.insert("ShoppingCartDto.insert", cnum);
+            mapper.commit();
+            mapper.close();
+            return num;
+    }
+    // 장바구니 삭제
+    public int delete(int clothesNum) {
+        SqlSession mapper = SqlSessionBean.getSession();
+           int delete =  mapper.delete("ShoppingCartDto.delete", clothesNum);
+            mapper.commit();
+            mapper.close();
+            return delete;
+    }
+}

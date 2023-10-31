@@ -1,0 +1,100 @@
+<%@page import="dao.CustomerDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<!--
+	Apex by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<!-- 웹사이트 전체적인 틀-->
+<%@page import="java.util.List"%>
+<%@page import="dto.CustomerDto"%>
+<html>
+<head>
+
+<title>BELLO</title>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="../assets/css/main.css?=3" />
+</head>
+<body class="is-preload">
+
+	<!-- 					<a class="logo" href="index.html"><strong>Bello</strong></a> -->
+	<!-- Header -->
+	<header id="header">
+		<div>
+			<div class="inner">
+				<ul>
+							<li><a href="list.jsp">고객목록</a></li>
+							<li><a href="clothesList.jsp">상품등록</a></li>
+							<li><a href="../notice/Notice.jsp">공지사항</a></li>
+							<li><a href="">고객센터</a></li>
+							<li><a href ="../login/logout.jsp">로그아웃</a></li>
+						</ul>		
+			</div>
+			<div class="first">
+				<ul>
+					<li><a href="clothe_outer.jsp">OUTER</a></li>
+					<li><a href="clothe_top.jsp">TOP</a></li>
+					<li><a href="clothe_pants.jsp">PANTS</a></li>
+					<li><a href="clothe_shoes.jsp">SHOES</a></li>
+					<li><a href="#">STYLING</a> <!-- 스타일링 배너 -->
+						
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<!-- Search Bar -->
+    <div id="search">
+        <a class="logo" href="index.html"><strong>Bello</strong></a>
+    </div>
+
+
+    
+    <%
+        // CustomerDao를 사용하여 고객 목록을 불러옵니다.
+        CustomerDao customerDao = CustomerDao.getInstance();
+        List<CustomerDto> customerList = customerDao.getCustomerList();
+    %>
+
+   <!-- 고객 목록을 표시하는 부분 -->
+<section>
+    <div>
+        <h2>고객 목록</h2>
+        <table>
+            <tr>
+                <th>이름</th>
+                <th>아이디</th>
+                <th>전화번호</th>
+                <th>이메일</th>
+            </tr>
+            
+            <%
+                for (CustomerDto customer : customerList) {
+            %>
+            <tr>
+                <td><%= customer.getName() %></td>
+                <td><%= customer.getId() %></td>
+                <td><%= customer.getTel() %></td>
+                <td><%= customer.getEmail() %></td>
+            </tr>
+            <%
+                }
+            %>
+        </table>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+   <%@ include  file="../footer.jsp"%>
+    <!-- Scripts -->
+    <!-- 스크립트 내용은 그대로 유지 -->
+
+</body>
+</html>

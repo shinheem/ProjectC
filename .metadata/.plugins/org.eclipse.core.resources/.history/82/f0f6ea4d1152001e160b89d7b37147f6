@@ -1,0 +1,26 @@
+<%@page import="dao.BuyDao"%>
+<%@page import="dto.BuyDto"%>
+<%@page import="dto.CustomerDto"%>
+<%@page import="dao.CustomerDao"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<% 
+CustomerDao dao = CustomerDao.getInstance();
+CustomerDto my = dao.selectOne((String)session.getAttribute("id"));
+
+
+List<BuyDto> list = BuyDao.dao.list();
+request.setAttribute("list", list);
+request.setAttribute("my", my);                 
+pageContext.forward("buy_View.jsp");
+		%>
+</body>
+</html>

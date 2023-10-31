@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ShoppingCartDto">
+
+    <!-- 아이디로 담은 상품 조회 -->
+    <select id="selectAll" resultType="dto.ShoppingCartDto">
+        SELECT *
+        FROM Shopping_Cart
+    </select>
+    
+    <select id="cartlist" parameterType="String" resultType="dto.ShoppingCartDto">
+        SELECT *
+        FROM Shopping_Cart
+        where id = #{id}
+    </select>
+    
+    <!-- 장바구니 상품 삭제 하기 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM shopping_cart
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 장바구니 상품 추가 하기 -->
+    <insert id="insert" parameterType="dto.ShoppingCartDto">
+        INSERT INTO shopping_cart (id, clothesSize,clothesNum, clothesName, cartQuantity,clothesImage,price2, cartIndate)
+        VALUES (#{id}, #{clothesSize},#{clothesNum}, #{clothesName}, #{cartQuantity}, #{clothesImage}, #{price2}, sysdate)
+    </insert>
+</mapper>

@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="dao.ClothesDao" %>
+
+<%
+int clothesNum = 0;
+if(request.getParameter("clothesNum") != null){
+    clothesNum=Integer.parseInt(request.getParameter("clothesNum"));
+}
+
+ClothesDao dao = ClothesDao.getInstance();
+if (dao.delete(clothesNum) == 1) {
+    String message = clothesNum + "상품이 삭제되었습니다.";
+    request.setAttribute("message", message);
+    request.setAttribute("url", "clothesList.jsp");
+    pageContext.forward("clothesList.jsp");
+}
+%>
+<!-- 이 부분에서 서버 측에서 전달한 메시지를 출력합니다 -->
+<script>
+alert("<%= request.getAttribute("message") %>");
+</script>

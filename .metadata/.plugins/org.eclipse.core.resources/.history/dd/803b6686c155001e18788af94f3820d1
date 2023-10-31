@@ -1,0 +1,97 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.io.*,java.util.*,javax.servlet.*"%>
+<%@ page import="javax.servlet.http.*"%>
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>BELLO</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="../css2/login.css?=3" />
+    <link rel="stylesheet" href="assets/css/img.css?=3">
+    <!-- JavaScript로 헤더를 숨기고 나타나게 하는 코드 -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 페이지가 로드될 때 실행됩니다.
+
+        // 세션 변수 user가 비어있는지 확인하여 헤더를 숨길지 표시할지 결정합니다.
+        // 세션 변수 user가 있으면 로그인된 상태로 간주합니다.
+        const userSession = '${sessionScope.user}'; // 세션 변수 값 가져오기
+
+        const header = document.getElementById('header');
+
+        if (!userSession) {
+            // 로그인되지 않은 상태라면 헤더를 숨깁니다.
+            header.style.display = 'none';
+        } else {
+            // 로그인된 상태라면 헤더를 보여줍니다.
+            header.style.display = 'block';
+        }
+    });
+</script>
+    
+</head>
+<body class="is-preload">
+<!-- Header -->
+<%@ include  file="../nav.jsp"%>
+<!-- 이 공간에 기능들 넣으시면 됩니다.(상품 목록은 메인에서 갖다 쓰셔두 돼요.) -->
+<div class="container mt-3 width30">
+    <h2>회원 로그인</h2>
+    
+    <!-- 오류 메시지를 표시할 div 요소 추가 -->
+    <div id="incorrect" style="display: none; color: red;">계정 정보가 일치하지 않습니다.</div>
+    
+    <form action="login.jsp" method="post">
+        <div class="mb-3 mt-3">
+            <label for="userid">아이디:</label>
+            <input class="form-control" id="userid" placeholder="Enter id" 
+                name="id" required>
+        </div>
+        <div class="mb-3">
+            <label for="pwd">패스워드:</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" 
+                name="password" required>
+        </div>
+        <div class="form-check mb-3">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="remember"> Remember me
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">로그인</button>
+        <button type="button" class="btn btn-primary" 
+            onclick="location.href='${pageContext.request.contextPath}'">HOME</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='register_View.jsp'">회원가입</button>
+    </form>
+</div>
+
+<!-- 스크립트를 이용하여 오류 메시지 표시 -->
+<script type="text/javascript">
+    var incorrectParam = '${param.incorrect}';
+    if (incorrectParam === 'y') {
+        document.getElementById('incorrect').style.display = 'block';
+    }
+</script>
+
+<!-- Footer -->
+<footer id="footer">
+    <h4>&copy; Untitled Corporation. All rights reserved. Lorem ipsum dolor sit amet nullam.</h4>
+    <ul>
+        <li class="icon solid fa-map-marker-alt">
+        <li class="icon solid fa-envelope">
+        <li class="icon brands fa-twitter">
+        <li class="icon solid fa-phone">
+    </ul>
+</footer>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.dropotron.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

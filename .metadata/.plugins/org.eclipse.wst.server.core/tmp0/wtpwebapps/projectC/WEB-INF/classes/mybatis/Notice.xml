@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NoticeDto">
+
+ 	<select id="list" resultType="dto.NoticeDto">
+ 		SELECT * 
+ 		FROM notice
+ 	</select>
+
+	<select id="pagelist" resultType="dto.NoticeDto" parameterType="java.util.Map">
+ 		SELECT * FROM 
+			(SELECT rownum r ,f.* FROM
+								(SELECT * FROM notice  ORDER BY noticeNum DESC) f)
+		WHERE r BETWEEN #{start} AND #{end}
+ 	</select>
+	
+<insert id="noticeboardInsert" parameterType="dto.NoticeDto">
+		INSERT INTO 
+		notice(noticeNum,writer,noticeTitle,noticeContent,ip)
+		VALUES
+		(notice_NoticeNum_seq.nextval,#{writer},#{noticeTitle},#{noticeContent},#{ip,jdbcType=VARCHAR})
+		<selectKey keyProperty="noticeNum" resultType="int" order="AFTER">
+		select notice_noticeNum_seq.currval
+		from dual
+		</selectKey>
+</insert>	
+<!-- 상세보기 update -->
+<select id="noticeboardDetailData" resultType="dto.NoticeDto" parameterType="int">
+		SELECT noticeNum,id,noticeTitle,noticeContent,TO_CHAR(noticeDate,'YYYY-MM-DD')
+		FROM notice
+		WHERE noticeNum=#{noticeNum}
+	</select>
+	
+	<!-- 수정, 삭제 delete -->
+	<update id="noticeboardUpdate" parameterType="dto.NoticeDto">
+		UPDATE notice 
+		SET
+		noticeTitle=#{noticeTitle}, noticeContent=#{noticeContent}, ip=#{ip}
+		WHERE 
+		noticeNum=#{noticeNum}
+	</update>
+	
+	<delete id="noticeboardDelete" parameterType="int">
+		DELETE FROM notice
+		WHERE noticeNum=#{noticeNum}
+	</delete>
+	<!-- 전체글 개수 -->
+	 	<select id="noticecount" resultType="int">
+ 		SELECT count(*) FROM notice
+ 	</select>
+ 	
+ 	<select id="selectByNoticeNum" parameterType="int" resultType="dto.NoticeDto">
+ 		SELECT * 
+ 		FROM 
+ 			notice
+ 		WHERE 
+ 			noticeNum=#{noticeNum}   
+ 	</select>
+ </mapper>

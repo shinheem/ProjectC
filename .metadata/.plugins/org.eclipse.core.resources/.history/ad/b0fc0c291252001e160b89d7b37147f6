@@ -1,0 +1,185 @@
+--고객 테이블
+CREATE TABLE customer(
+id varchar2(50) PRIMARY KEY,
+password varchar2(50),
+name varchar2(30),
+tel varchar2(20),
+email varchar2(100)
+);
+
+select * from CUSTOMER;
+
+drop table customer cascade constraints;
+
+DROP TABLE customer;
+TRUNCATE TABLE customer;
+
+--상품 테이블(clothesContent(2000) clothesImage(100))
+CREATE TABLE clothes(
+clothesNum number(6) PRIMARY KEY,		
+clothesKind char(1), -- outer: 1, top:2 , bottom: 3 , shoes: 4
+price2 number(7) default 0,
+clothesName varchar2(200),
+clothesContent varchar2(2000) DEFAULT NULL,
+clothesImage varchar2(100) DEFAULT 'default.jpg',
+clothesCount number(10),
+useyn char default 'y', -- 판매 : y, 품절 : n
+pregDate DATE DEFAULT sysdate
+);
+
+drop table clothes cascade constraints;
+
+CREATE SEQUENCE clothes_seq START WITH 1 INCREMENT BY 1;
+DROP SEQUENCE clothes_seq;
+
+DROP TABLE clothes;
+TRUNCATE TABLE clothes;
+
+--스타일링 테이블
+CREATE TABLE styling(
+snum number(5) PRIMARY KEY,
+clothesNum1 number(5),
+clothesNum2 number(5),
+clothesNum3 number(5),
+clothesNum4 number(5),
+stylingContent varchar2(2000),		-- 내용 글
+picture varchar2(200), -- 착용 사진 업로드 파일명 (여러개를 ,로 구분해서 저장하기 )
+styleDate DATE DEFAULT sysdate,
+CONSTRAINT fk_styling_clothesNum1 FOREIGN KEY (clothesNum1) REFERENCES clothes(clothesNum),
+CONSTRAINT fk_styling_clothesNum2 FOREIGN KEY (clothesNum2) REFERENCES clothes(clothesNum),
+CONSTRAINT fk_styling_clothesNum3 FOREIGN KEY (clothesNum3) REFERENCES clothes(clothesNum),
+CONSTRAINT fk_styling_clothesNum4 FOREIGN KEY (clothesNum4) REFERENCES clothes(clothesNum)
+);
+
+drop table styling cascade constraints;
+
+CREATE SEQUENCE styling_seq START WITH 1 INCREMENT BY 1;
+DROP SEQUENCE styling_seq;
+DROP TABLE STYLING;
+TRUNCATE TABLE STYLING;
+
+ALTER TABLE STYLING DROP CONSTRAINT fk_styling_clothesNum1;
+ALTER TABLE STYLING DROP CONSTRAINT fk_styling_clothesNum2;
+ALTER TABLE STYLING DROP CONSTRAINT fk_styling_clothesNum3;
+ALTER TABLE STYLING DROP CONSTRAINT fk_styling_clothesNum4;
+
+--주문 테이블
+CREATE TABLE orderC (
+    orderNum number(10) PRIMARY KEY,
+    id varchar2(20),
+    orderDate DATE DEFAULT SYSDATE,
+    orderQuantity number(5),
+    CONSTRAINT fk_orderC_id FOREIGN KEY (id) REFERENCES customer(id)
+);
+
+drop table orderC cascade constraints;
+
+CREATE SEQUENCE orderC_seq START WITH 1 INCREMENT BY 1;
+DROP SEQUENCE orderC_seq;
+
+DROP TABLE orderC;
+TRUNCATE TABLE orderC;
+
+--고객센터 테이블
+CREATE TABLE CustomerQnA(
+customerQnANum NUMBER(5) PRIMARY KEY,
+qnaSubject varchar2(30),
+questionContents varchar2(1000),
+answerContents varchar2(1000),
+id varchar2(20),
+questionDate DATE DEFAULT sysdate,
+answerDate DATE DEFAULT sysdate,
+constraint fk_CustomerQnA_id foreign key(id) references customer(id));
+
+drop table customerQnA cascade constraints;
+
+CREATE SEQUENCE CustomerQnA_seq START WITH 1 INCREMENT BY 1;
+DROP SEQUENCE CustomerQnA_seq;
+
+DROP TABLE CustomerQnA;
+TRUNCATE TABLE CustomerQnA;
+ALTER TABLE CustomerQnA DROP CONSTRAINT fk_CustomerQnA_id;
+
+//보류
+--공지사항 테이블
+CREATE TABLE notice(
+content varchar2(3000)
+);
+
+drop table notice cascade constraints;
+
+DROP TABLE notice;
+
+--장바구니 테이블
+CREATE TABLE shopping_cart(
+id varchar2(20),					-- 사용자 아이디 %필수%
+clothesSize varchar2(1),				-- 사이즈 S, M, L
+clothesNum number(6) ,				-- 제품 번호 %필수%
+clothesName varchar2(200),			-- 제품 이름
+cartQuantity number(5),				-- 수량
+clothesImage varchar2(100) DEFAULT 'default.jpg',	-- 상품 사진
+price2 number(7) default 0,			-- 가격
+cartResult char(1) default 1, -- 구매 전 : 1, 구매 완료 : 2
+cartIndate DATE DEFAULT sysdate,	-- 추가 날짜
+CONSTRAINT fk_id FOREIGN KEY(id) REFERENCES customer(id),
+CONSTRAINT fk_clothesNum FOREIGN KEY(clothesNum) REFERENCES clothes(clothesNum),
+constraint pk_shoppingcart primary key(id,clothesNum)
+);
+
+select * from shopping_cart;
+
+drop table shopping_cart cascade constraints;
+alter table shopping_cart drop constraint SYS_C007329;
+alter table shopping_cart add constraint pk_shoppingcart primary key(id,clothesNum);
+
+DROP TABLE shopping_cart;
+TRUNCATE TABLE shopping_cart;
+
+ALTER TABLE SHOPPING_CART DROP CONSTRAINT fk_id;
+ALTER TABLE SHOPPING_CART DROP CONSTRAINT fk_clothesNum;
+
+--상세 주문 테이블
+CREATE TABLE order_detail(
+odNum number(10) primary key,
+orderNum number(10),
+clothesNum number(5),
+orderDetailQuantity number(5),
+detailResult char(1) default 1,
+constraint fk_orderC_detail foreign key(orderNum) references orderC(orderNum),
+constraint fk_clothes_detail foreign key(clothesNum) references clothes(clothesNum));
+   
+create sequence order_detail_seq start with 1 increment by 1;
+
+drop table order_detail cascade constraints;
+
+DROP  SEQUENCE order_detail_seq;
+DROP TABLE order_detail;
+TRUNCATE TABLE order_detail;
+
+--관리자 테이블 , 추후 사용
+create table admin(
+    id varchar2(20) primary key,
+    password varchar2(20),
+    name varchar2(40),
+    email varchar2(40),
+    phone varchar2(20));
+
+drop table admin cascade constraints;
+
+--주문 내역 테이블
+CREATE TABLE c_buy(
+pbuydate DATE,
+clothesNum number(6),
+id varchar2(50),
+cname varchar2(100), 
+cprice number(10),
+cquantity number(6),
+csize varchar2(50),   
+buydate DATE DEFAULT sysdate,
+CONSTRAINT fk_customer_id FOREIGN KEY (id) REFERENCES customer(id),
+CONSTRAINT fk_clothes_clothesNum FOREIGN KEY (clothesNum) REFERENCES clothes(clothesNum)
+);
+
+drop table c_buy cascade constraints;
+
+select * from c_buy;

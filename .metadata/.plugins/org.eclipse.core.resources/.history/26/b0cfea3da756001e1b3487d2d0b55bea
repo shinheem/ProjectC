@@ -1,0 +1,116 @@
+body{
+	background-color:whitesmoke; 
+	height: 100%;
+}
+
+/* Style for the main container */
+
+
+#list {
+  margin: auto;
+  width: 900px;
+}
+
+/* Style for each notice item */
+ul#main li {
+  text-align:left;
+  margin: auto;
+  padding: 1px;
+  margin-bottom: 10px;
+  list-style: none;
+  	flex-direction:column;
+}
+#list ul.row > li{
+	padding: 3px 0px;
+}
+#list ul.row > li:nth-child(2){
+	flex-basis:35%;
+	text-align:left;
+}
+/* Style for notice title links */
+ul#main li a.title {
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+ul#main li a.title:hover {
+  color: #808080;
+}
+
+/* Style for notice date */
+ul#main li ul li:last-child {
+  color: #666;
+  font-size: 80%;
+}
+
+/* Style for page buttons */
+a.pagenum {
+  text-decoration: none;
+  padding: 5px 10px;
+  margin: 0 2px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 3px;
+}
+
+a.pagenum:hover {
+  background-color: #808080;
+  color: #fff;
+}
+
+/* Style for the "글쓰기" and "홈" buttons */
+div[style="float:right;"] a.button {
+  text-decoration: none;
+  padding: 5px 10px;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+div[style="float:right;"] a.button:hover {
+  background-color: #808080;
+  color: #000000;
+}
+/* form 요소를 flex 컨테이너로 설정하여 내부 요소를 가로 정렬합니다. */
+.sr {
+  text-align: center;
+  display: flex;
+  justify-content:end; /* 가로 중앙 정렬을 추가합니다. */
+  align-items: center; /* 세로 중앙 정렬을 유지합니다. */
+}
+.s {
+  display: flex;
+  align-items: center;
+}
+
+/* 검색창 스타일 */
+input.keyword {
+  font-size: 16px;
+  width: 250px;
+  padding: 3px;
+  border: 2px ridge black;
+  text-align: center;
+}
+
+/* 검색 버튼 스타일 */
+button[type="submit"] {
+  width: auto; /* 내용 크기에 맞게 자동 조정 */
+  height: 70%;
+  border: 0px;
+  background: black;
+  display: flex;
+  justify-content: center; /* 텍스트를 수평으로 가운데 정렬 */
+  align-items: center; /* 텍스트를 수직으로 가운데 정렬 */
+  color: white;
+  margin-right:0px; /* 검색창과 간격을 둡니다. */
+  padding:0.5px 10px;
+}
+#list p {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}

@@ -1,0 +1,35 @@
+package dao;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+
+import dto.BuyDto;
+import dto.ShoppingCartDto;
+import mybatis.SqlSessionBean;
+
+public class BuyDao {
+
+    public static BuyDao dao = new BuyDao();
+    private BuyDao() {}
+    public static BuyDao getInstance() {
+        return dao;
+    }
+
+    public int buyinsert(Map<String,Object> key){
+    	SqlSession sqlSession = SqlSessionBean.getSession();
+    	int vo = sqlSession.insert("Buy.insert", key);
+    	sqlSession.commit();
+    	sqlSession.close();
+    	return vo;
+    }
+
+    // 주문 정보조회
+    public List<BuyDto> list() {
+        SqlSession sqlSession = SqlSessionBean.getSession();
+        List<BuyDto> list = sqlSession.selectList("Buy.list");
+        sqlSession.close();
+        return list;
+    }
+}

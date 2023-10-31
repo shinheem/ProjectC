@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<!--
+	Apex by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<!-- 웹사이트 전체적인 틀-->
+<%@page import="dao.ShoppingCartDao"%>
+<%@page import="dto.ClothesDto"%>
+<html>
+	<head>
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+		<title>BELLO</title>
+		<meta charset="utf-8" />
+		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="../assets/css/clothes_detail.css?=3" />
+	</head>
+	<body class="is-preload">
+
+<!-- 					<a class="logo" href="index.html"><strong>Bello</strong></a> -->
+		<!-- Header -->
+<%@ include  file="../nav.jsp"%>
+<!-- 이 공간에 기능들 넣으시면 됩니다.(상품 목록은 메인에서 갖다 쓰셔두 돼요.) -->
+		<div class="clothe" >
+		<img alt="" src="/imageupload/${vo.clothesImage}" style="text-align: center;">
+		</div>
+		<div class="line"></div>
+		<div class="infor">
+		<ul>
+			<li><c:out value="${vo.clothesName}"></c:out>
+			<p><fmt:formatNumber value="${vo.price2}" type="currency" currencySymbol="￦"/></p>
+			<li><select name="kind" onchange="handleOnChange(this)">
+			<option value="size1">S(80)</option>
+  			<option value="size2">M(85)</option>
+ 			<option value="size3">L(90)</option>
+  			</select></li>
+  			<li>
+  			<form action="cart.jsp" method="post">
+				<input type="hidden" name="clothesNum" value="${vo.clothesNum}">  			
+				<input type="hidden" name="size" value="">  			
+	  			<button type="button" onclick="location.href = '../cart/cart.jsp?clothesNum=${vo.clothesNum}'">장바구니</button>
+  			</form>
+  			
+  			
+  			</li>
+		</ul>
+		</div>
+
+
+
+      <!-- Footer -->
+         <footer id="footer"> 
+                  <h4>&copy; Untitled Corporation. All rights reserved. Lorem ipsum dolor sit amet nullam.</h4>
+                           <ul>
+                        <li class="icon solid fa-map-marker-alt">
+                        <li class="icon solid fa-envelope">
+                        <li class="icon brands fa-twitter">
+                        <li class="icon solid fa-phone">
+                        </ul>
+         </footer>
+
+      <!-- Scripts -->
+         <script src="../assets/js/jquery.min.js"></script>
+         <script src="../assets/js/jquery.dropotron.min.js"></script>
+         <script src="../assets/js/browser.min.js"></script>
+         <script src="../assets/js/breakpoints.min.js"></script>
+         <script src="../assets/js/util.js"></script>
+         <script src="../assets/js/main.js"></script>
+   </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

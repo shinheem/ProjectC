@@ -1,0 +1,19 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dto.StylingDto" %>
+<%@ page import="dao.StylingDao" %>
+<% 
+Map<String,Object> map = new HashMap<>();
+
+StylingDao dao = StylingDao.getInstance();
+String image = "../images/1";
+
+List<StylingDto> list = dao.list();
+request.setAttribute("list", list);
+request.setAttribute("image", image);
+
+pageContext.forward("stylingView.jsp");
+
+%>

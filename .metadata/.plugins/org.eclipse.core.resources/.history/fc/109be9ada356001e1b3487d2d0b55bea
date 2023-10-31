@@ -1,0 +1,155 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<!DOCTYPE HTML>
+<!--
+	Apex by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<!-- 웹사이트 전체적인 틀-->
+<html>
+	<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+		<title>BELLO</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="../assets/css/main.css?=3" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css2/list.css"> 
+	</head>
+	<body class="is-preload">
+
+<!-- 					<a class="logo" href="index.html"><strong>Bello</strong></a> -->
+		<!-- Header -->
+			<header id="header">
+			<div>
+				<div class="inner">
+						<ul>
+							<li><a href="list.jsp">고객목록</a></li>
+							<li><a href="clothesList.jsp">상품등록</a></li>
+							<li><a href="adminNotice.jsp">공지사항</a></li>
+							<li><a href="../CustomerQnA/QnA.jsp">고객센터</a></li>
+							<li><a href ="../login/logout.jsp">로그아웃</a></li>
+						</ul>		
+			</div>
+			<div class="first">
+				<ul>
+					<li><a href="../clothes/clothe_outer.jsp">OUTER</a></li>
+					<li><a href="../clothes/clothe_top.jsp">TOP</a></li>
+					<li><a href="../clothes/clothe_pants.jsp">PANTS</a></li>
+					<li><a href="../clothes/clothe_shoes.jsp">SHOES</a></li>
+					<li><a href="../styling/stylingList.jsp">STYLING</a> <!-- 스타일링 배너 -->
+						</ul>
+					</div>
+			</div>
+			</header>
+			
+		<!-- Search Bar -->
+			<div id="search">
+			<a class="logo" href="admin.jsp"><strong>BELLO - 공지 사항</strong></a> 
+			
+ 	</div>
+<!-- 이 공간에 기능들 넣으시면 됩니다.(상품 목록은 메인에서 갖다 쓰셔두 돼요.) -->
+
+<!-- 공지사항  -->
+<main id="list">
+<div style="margin:auto;width:900px;">
+<ul id="main">
+	<li>
+		<ul  class="row" style="text-align: center;margin: auto;">
+		</ul>
+	</li>
+	<c:forEach var="vo" items="${list}"> 
+	<li>
+		<ul  class="row" style="text-align: center; margin: auto;"  >
+			<li>
+				<c:out value="${vo.r }"/>
+			</li>
+			<li><a href="adminNoticeRead.jsp?noticeNum=${vo.noticeNum }&page=${paging.currentPage}" class="title">  
+				<c:out value="${vo.noticeTitle }"/>
+			</a>
+			..<span style="color:orange;font-size: 80%;"></span></li>
+			<li>
+			<fmt:formatDate value="${vo.noticeDate }" pattern="yyyy-MM-dd" var="noticeDate"/>
+			<c:if test='${noticeDate == today}'>
+				<fmt:formatDate value="${vo.noticeDate }" pattern="yyyy-MM-dd"/>
+			</c:if>
+			<c:if test='${noticeDate != today}'>
+				<fmt:formatDate value="${vo.noticeDate }" pattern="yyyy-MM-dd"/>
+			</c:if>
+			</li>
+		</ul>
+		<hr>
+	</li>
+	</c:forEach>
+</ul>
+<div style="float:right;">
+    <c:if test="${user != null && user.role == 'admin'}">
+        <a href="adminNoticeWrite.jsp?page=${paging.currentPage}" class="button">글쓰기</a>
+    </c:if>
+    <a href="admin.jsp" class="button">홈</a>
+</div>
+<script type="text/javascript">
+	
+	
+</script>
+
+<!-- 페이지 버튼을 클릭하면  url은  http://localhost:8081/jspBoard/community/list.jsp 는 동일하고 
+	 page 번호 파라미터만 변경됩니다.  이런 경우 앞의 부분 생략하고 ? 부터 작성.
+-->
+<div style="width:700px;margin: auto;padding: 20px;text-align: center;">
+	<c:out value=""/> <br>
+	<hr>
+	<a class="pagenum" href="?page=1">&lt;&lt;</a>   <!--(1) 첫번째 페이지 1번으로 이동 -->
+	
+	<!--(2)  실행하면서 파악해보세요. --> <!-- 요청은 ListController가 받음.page파라미터 변경됨. -->
+	<a class="pagenum" href="?page=${paging.startPage-1 }"      
+			style='<c:if test="${paging.startPage==1 }">display:none;</c:if>' >&lt;</a>
+	
+	<!--(3) 페이지 범위 startPage 부터 endPage 까지 반복 여기서 i 값은 페이지값-->
+	<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
+		<a class="pagenum ieach" href="?page=${i }"><c:out value="${i }"/></a>
+	</c:forEach>
+	
+	<!--(4)  실행하면서 파악해보세요. -->
+	<a class="pagenum" href="?page=${paging.endPage+1 }"
+			style='<c:if test="${paging.endPage==paging.totalPage }">display:none;</c:if>'	>&gt;</a>
+			<!--  paging.totalPage는 마지막 페이지.-->
+	<a class="pagenum" href="?page=${paging.totalPage }">&gt;&gt;</a>  <!--(5) 가장 마지막 페이지로 이동 -->
+</div>
+</main>
+<script type="text/javascript">
+	const pnums = document.querySelectorAll('.ieach');
+	pnums.forEach(function(item){
+		console.log(item);
+		/* item 번호가 현재 페이지 이면 글꼴 스타일을 다르게함. */
+		if(item.innerHTML=='${paging.currentPage}') {    
+			item.style.color = 'black';
+			item.style.fontWeight = 'bold';
+		}else{
+			item.style.color = '';
+		}
+	});
+</script>
+      <!-- Footer -->
+         <footer id="footer"> 
+                  <h4>&copy; Untitled Corporation. All rights reserved. Lorem ipsum dolor sit amet nullam.</h4>
+                           <ul>
+                        <li class="icon solid fa-map-marker-alt">
+                        <li class="icon solid fa-envelope">
+                        <li class="icon brands fa-twitter">
+                        <li class="icon solid fa-phone">
+                        </ul>
+         </footer>
+
+      <!-- Scripts -->
+         <script src="assets/js/jquery.min.js"></script>
+         <script src="assets/js/jquery.dropotron.min.js"></script>
+         <script src="assets/js/browser.min.js"></script>
+         <script src="assets/js/breakpoints.min.js"></script>
+         <script src="assets/js/util.js"></script>
+         <script src="assets/js/main.js"></script>
+
+   </body>
+</html>

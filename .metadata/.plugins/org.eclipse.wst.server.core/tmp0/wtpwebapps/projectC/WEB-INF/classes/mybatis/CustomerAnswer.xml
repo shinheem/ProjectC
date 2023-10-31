@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- src/main/resources/mappers/customerQnAMapper.xml -->
+<!-- src/main/resources/mappers/customerQnAMapper.xml -->
+<mapper namespace="CustomerAnswerDto">
+
+    <!-- 고객 문의 답변 등록 -->
+    <insert id="answerInsert" parameterType="dto.CustomerAnswerDto">
+        INSERT INTO 
+        CustomerAnswer 
+        (anum,question,answerWriter,answerContents)
+        VALUES
+         (CustomerAnswer_anum_seq.nextval, #{question}, #{answerWriter}, #{answerContents,jdbcType=VARCHAR})
+    </insert>
+    
+    <!-- 고객 문의 답변 삭제 -->
+    <delete id="answerDelete" parameterType="int">
+        DELETE FROM 
+        CustomerAnswer
+        WHERE anum = #{anum} 
+    </delete>
+      
+    <!-- 몰루 --> 
+ <select id="maxOf" resultType="int">
+ 		SELECT max(anum) FROM CustomerAnswer 
+ 	</select>
+ 	
+    <!-- 답변 보기 -->
+ 	<select id="commentsList" parameterType="int" resultType="dto.CustomerAnswerDto">
+ 	SELECT * 
+ 	FROM 
+ 	CustomerAnswer 
+ 	WHERE question=#{question}
+ 	</select>
+ 	
+    <!-- 답변글의 댓글 개수 컬럼을 update -->
+ 	 <update id="setCommentCount" parameterType="int">
+ 	 <!-- 답변글 answerNum의 댓글이 몇개인지 answer 테이블에서 count(*)로 구하고
+ 	       question테이블을  update를 한다. -->
+ 	    update CustomerQeustion
+ 	    set commentcount =(
+ 	    SELECT count(*) 
+ 	FROM 
+ 	CustomerAnswer 
+ 	WHERE question=#{anum}
+ 	    )
+ 	where anum=#{anum}
+ 	 </update>
+</mapper>
